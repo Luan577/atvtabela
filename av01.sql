@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 12/04/2022 às 10:26
+-- Tempo de geração: 26/04/2022 às 10:47
 -- Versão do servidor: 5.7.28-0ubuntu0.18.04.4
 -- Versão do PHP: 7.2.24-0ubuntu0.18.04.2
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `alunos`
+-- Banco de dados: `av01`
 --
 
 -- --------------------------------------------------------
@@ -27,24 +27,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `material` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `quantidade` mediumint(9) NOT NULL,
-  `dathora` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+  `quantidade` mediumint(6) UNSIGNED NOT NULL,
+  `datahora` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Estrutura para tabela `usuario`
+-- Fazendo dump de dados para tabela `material`
 --
 
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `senha` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `material` (`id`, `nome`, `quantidade`, `datahora`) VALUES
+(1, 'Luan', 2, '2022-04-29 10:46:00');
 
 --
 -- Índices de tabelas apagadas
@@ -57,12 +51,6 @@ ALTER TABLE `material`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -70,12 +58,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `material`
 --
 ALTER TABLE `material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
