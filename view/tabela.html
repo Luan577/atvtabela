@@ -1,9 +1,11 @@
+
+  
 <table>
   <thead>
     <tr>
-      <th>material</th>
       <th>nome</th>
       <th>quantidade</th>
+      <th>datahora</th>
       <th>Editar</th>
       <th>Remover</th>
     </tr>
@@ -15,12 +17,17 @@
       <td>{quantidade}</td>
       <td>{datahora}</td>
       <td>
-        <button type="button">Editar</button>
+        <button type="button"
+        onclick="location.href='?class=Form&method=editar&id={id}'"
+        >Editar</button>
       </td>
       <td>
-        <button type="button">Remover</button>
+        <button type="button"
+          onclick="if(confirm('Deseja realmente remover?'))
+            location.href='?class=Tabela&method=remover&id={id}'"
+          >Remover</button>
       </td>
     </tr>
     {/linha}
   </tbody>
-</table>
+</table> 

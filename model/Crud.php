@@ -53,10 +53,10 @@ class Crud
       $sql = "DELETE FROM $this->tabela WHERE $condicao";
       $resultado = $conexao->query($sql);
       if ($resultado->rowCount() > 0) {
-        echo "Registro excluído com sucesso!";
+        echo "Excluído com sucesso!";
         return true;
       } else {
-        echo "Erro ao excluir registro!";
+        echo "Erro ao excluir!";
         return false;
       }
     }
