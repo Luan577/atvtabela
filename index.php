@@ -16,7 +16,7 @@ spl_autoload_register('classLoader');
 // Front Controller
 class Aplicacao
 {
-  private static $app = "/LuanDantas/Web2";
+  private static $app = "/Luan";
   public static function run()
   {
     $layout = new Template('view/layout.html');

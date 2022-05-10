@@ -3,6 +3,7 @@
 class Form
 {
   private $message = "";
+  private $error = "";
   public function __construct()
   {
     Transaction::open();
@@ -22,7 +23,7 @@ class Form
       try {
         $conexao = Transaction::get();
         $material = new Crud('material');
-        $nome= $conexao->quote($_POST['nome']);
+        $nome = $conexao->quote($_POST['nome']);
         $quantidade = $conexao->quote($_POST['quantidade']);
         $datahora = $conexao->quote($_POST['datahora']);
         if (empty($_POST["id"])) {
@@ -31,8 +32,11 @@ class Form
           $id = $conexao->quote($_POST['id']);
           $material->update("nome=$nome,quantidade=$quantidade,datahora=$datahora", "id=$id");
         }
+        $this->message = $material->getMessage();
+        $this->error = $material->getError();
       } catch (Exception $e) {
-        echo $e->getMessage();
+        $this->message = $e->getMessage();
+        $this->error = true;
       }
     }
   }
@@ -44,19 +48,37 @@ class Form
         $id = $conexao->quote($_GET['id']);
         $material = new Crud('material');
         $resultado = $material->select("*", "id=$id");
-        $form = new Template("view/form.html");
-        foreach ($resultado[0] as $cod => $valor) {
-          $form->set($cod, $valor);
+        if (!$material->getError()) {
+          $form = new Template("view/form.html");
+          foreach ($resultado[0] as $cod => $datahora) {
+            $form->set($cod, $datahora);
+          }
+          $this->message = $form->saida();
+        } else {
+          $this->message = $material->getMessage();
+          $this->error = true;
         }
-        $this->message = $form->saida();
       } catch (Exception $e) {
-        echo $e->getMessage();
+        $this->message = $e->getMessage();
+        $this->error = true;
       }
     }
   }
   public function getMessage()
   {
-    return $this->message;
+    if (is_string($this->error)) {
+      return $this->message;
+    } else {
+      $msg = new Template("view/msg.html");
+      if ($this->error) {
+        $msg->set("cor", "danger");
+      } else {
+        $msg->set("cor", "success");
+      }
+      $msg->set("msg", $this->message);
+      $msg->set("uri", "?class=Tabela");
+      return $msg->saida();
+    }
   }
   public function __destruct()
   {
