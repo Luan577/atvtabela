@@ -3,10 +3,10 @@
 spl_autoload_extensions('.php');
 function classLoader($class)
 {
-  $nomeArquivo = $class . '.php';
+  $modeloArquivo = $class . '.php';
   $pastas = array('controller', 'model');
   foreach ($pastas as $pasta) {
-    $arquivo = "{$pasta}/{$nomeArquivo}";
+    $arquivo = "{$pasta}/{$modeloArquivo}";
     if (file_exists($arquivo)) {
       require_once($arquivo);
     }

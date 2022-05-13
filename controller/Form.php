@@ -12,28 +12,28 @@ class Form
   {
     $form = new Template("view/form.html");
     $form->set("id", "");
-    $form->set("nome", "");
-    $form->set("quantidade", "");
-    $form->set("datahora", "");
+    $form->set("modelo", "");
+    $form->set("processador", "");
+    $form->set("sistemaoperacional", "");
     $this->message = $form->saida();
   }
   public function salvar()
   {
-    if (isset($_POST['nome']) && isset($_POST['quantidade']) && isset($_POST['datahora'])) {
+    if (isset($_POST['modelo']) && isset($_POST['processador']) && isset($_POST['sistemaoperacional'])) {
       try {
         $conexao = Transaction::get();
-        $material = new Crud('material');
-        $nome = $conexao->quote($_POST['nome']);
-        $quantidade = $conexao->quote($_POST['quantidade']);
-        $datahora = $conexao->quote($_POST['datahora']);
+        $tvbox = new Crud('tvbox');
+        $modelo = $conexao->quote($_POST['modelo']);
+        $processador = $conexao->quote($_POST['processador']);
+        $sistemaoperacional = $conexao->quote($_POST['sistemaoperacional']);
         if (empty($_POST["id"])) {
-          $material->insert("nome,quantidade,datahora", "$nome,$quantidade,$datahora");
+          $tvbox->insert("modelo,processador,sistemaoperacional", "$modelo,$processador,$sistemaoperacional");
         } else {
           $id = $conexao->quote($_POST['id']);
-          $material->update("nome=$nome,quantidade=$quantidade,datahora=$datahora", "id=$id");
+          $tvbox->update("modelo=$modelo,processador=$processador,sistemaoperacional=$sistemaoperacional", "id=$id");
         }
-        $this->message = $material->getMessage();
-        $this->error = $material->getError();
+        $this->message = $tvbox->getMessage();
+        $this->error = $tvbox->getError();
       } catch (Exception $e) {
         $this->message = $e->getMessage();
         $this->error = true;
@@ -46,16 +46,16 @@ class Form
       try {
         $conexao = Transaction::get();
         $id = $conexao->quote($_GET['id']);
-        $material = new Crud('material');
-        $resultado = $material->select("*", "id=$id");
-        if (!$material->getError()) {
+        $tvbox = new Crud('tvbox');
+        $resultado = $tvbox->select("*", "id=$id");
+        if (!$tvbox->getError()) {
           $form = new Template("view/form.html");
-          foreach ($resultado[0] as $cod => $datahora) {
-            $form->set($cod, $datahora);
+          foreach ($resultado[0] as $cod => $sistemaoperacional) {
+            $form->set($cod, $sistemaoperacional);
           }
           $this->message = $form->saida();
         } else {
-          $this->message = $material->getMessage();
+          $this->message = $tvbox->getMessage();
           $this->error = true;
         }
       } catch (Exception $e) {

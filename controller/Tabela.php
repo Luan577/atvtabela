@@ -11,8 +11,8 @@ class Tabela
   public function controller()
   {
     Transaction::get();
-    $material = new Crud("material");
-    $resultado = $material->select();
+    $tvbox = new Crud("tvbox");
+    $resultado = $tvbox->select();
     $tabela = new Template("view/tabela.html");
     if (is_array($resultado)) {
       $tabela->set("linha", $resultado);
@@ -25,8 +25,8 @@ class Tabela
       try {
         $conexao = Transaction::get();
         $id = $conexao->quote($_GET["id"]);
-        $material = new Crud("material");
-        $material->delete("id=$id");
+        $tvbox = new Crud("tvbox");
+        $tvbox->delete("id=$id");
       } catch (Exception $e) {
         echo $e->getMessage();
       }

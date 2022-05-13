@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 26/04/2022 às 10:47
+-- Tempo de geração: 13/05/2022 às 16:00
 -- Versão do servidor: 5.7.28-0ubuntu0.18.04.4
 -- Versão do PHP: 7.2.24-0ubuntu0.18.04.2
 
@@ -17,37 +17,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `av01`
+-- Banco de dados: `bdluan`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `material`
+-- Estrutura para tabela `tvbox`
 --
 
-CREATE TABLE `material` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `quantidade` mediumint(6) UNSIGNED NOT NULL,
-  `datahora` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Fazendo dump de dados para tabela `material`
---
-
-INSERT INTO `material` (`id`, `nome`, `quantidade`, `datahora`) VALUES
-(1, 'Luan', 2, '2022-04-29 10:46:00');
+CREATE TABLE `tvbox` (
+  `id` int(11) NOT NULL,
+  `modelo` varchar(10) NOT NULL,
+  `processador` varchar(255) NOT NULL,
+  `sistemaoperacional` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices de tabelas apagadas
 --
 
 --
--- Índices de tabela `material`
+-- Índices de tabela `tvbox`
 --
-ALTER TABLE `material`
+ALTER TABLE `tvbox`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -55,10 +48,10 @@ ALTER TABLE `material`
 --
 
 --
--- AUTO_INCREMENT de tabela `material`
+-- AUTO_INCREMENT de tabela `tvbox`
 --
-ALTER TABLE `material`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tvbox`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
